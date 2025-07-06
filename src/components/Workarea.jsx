@@ -7,7 +7,18 @@ import { GrSend } from 'react-icons/gr'
 
 const Workarea = () => {
     const [type, setType] = useState("doc")
-    const msgs = ["Hello","Hi, how can I help you?","what are the restrictions mentioned for the player?","The player is not allowed to play in the tournament if they have been suspended for any reason."]
+    const msgs = [
+        "Hello",
+        "Hi, how can I help you?",
+        "what are the restrictions mentioned for the player?",
+        "The player is not allowed to play in the tournament if they have been suspended for any reason.",
+        "What is the maximum number of players allowed in a team?",
+        "The maximum number of players allowed in a team is 15.",
+        "Can a player be substituted during the match?",
+        "Yes, a player can be substituted during the match, but only during a stoppage in play.",
+        "What is the duration of the match?",
+        "The duration of the match is 90 minutes, divided into two halves of 45 minutes each.",
+    ]
 
     const [chat, setChat] = useState(msgs)
     const handleCopySummary = () => {
@@ -53,7 +64,7 @@ const Workarea = () => {
                     </div>
                 </div>
 
-                <div className="chat-box max-h-full">
+                <div className="chat-box max-h-2/3 pb-15 mb-15">
                     <div id='msgs' className="flex flex-col w-4xl text-sm font-normal min-h-96 max-h-full overflow-y-auto scrollbar-custom mx-5 p-5 border border-gray-300 rounded-t-lg shadow-md bg-white">
                          {chat.map((msg,index)=>(
                             <div key={index} className={`msg w-full flex ${index % 2 === 0 ? 'justify-end' : ' justify-start'}  mb-3`}>
