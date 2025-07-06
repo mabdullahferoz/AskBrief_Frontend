@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import UploadFile from './UploadFile'
 import { FaFileLines, FaPaperPlane } from 'react-icons/fa6'
-import { BiSolidCopy } from 'react-icons/bi'
+import { BiLogIn, BiSolidCopy } from 'react-icons/bi'
 import {  toast } from 'react-toastify'
 import { GrSend } from 'react-icons/gr'
+import { FaSave } from 'react-icons/fa'
 
-const Workarea = () => {
+const Workarea = ({setUser}) => {
     const [type, setType] = useState("doc")
+    const [loggedin, setLoggedin] = useState(false)
     const msgs = [
         "Hello",
         "Hi, how can I help you?",
@@ -19,8 +21,17 @@ const Workarea = () => {
         "What is the duration of the match?",
         "The duration of the match is 90 minutes, divided into two halves of 45 minutes each.",
     ]
-
     const [chat, setChat] = useState(msgs)
+
+    const handleLogin = ()=>{
+        setLoggedin(true);
+        toast.success("Logged in successfully!");
+        setUser({
+            username: "ferozxdev",
+            email: "ferozxdev@gmail.com"
+        });
+    }
+
     const handleCopySummary = () => {
         const summaryText = document.getElementById('summary').innerText;
         navigator.clipboard.writeText(summaryText)
@@ -35,8 +46,17 @@ const Workarea = () => {
     return (
         <div className='w-full h-full box-content text-3xl font-black flex flex-col'>
             {/* <ToastContainer className={"text-sm"} position='top-right' autoClose={2000} theme='light'/> */}
-            <div className="navbar w-full h-24 bg-white border-b-1 border-gray-300 flex items-center p-5">
+            <div className="navbar w-full h-24 bg-white border-b-1 border-gray-300 flex items-center justify-between p-5">
                 <span className='logo text-blue-500'>AskBrief</span>
+                
+                {
+                    loggedin ? (
+                        <span className='save-session-btn bg-blue-600 hover:bg-blue-500 text-white text-lg font-bold px-3 py-2 rounded-lg cursor-pointer flex items-center gap-2'> <FaSave/> Save Session</span>
+                    ):(
+                        <span onClick={handleLogin} className='login-btn bg-blue-600 hover:bg-blue-500 text-white text-lg font-bold px-3 py-2 rounded-lg cursor-pointer flex items-center gap-2'>Login <BiLogIn className='h-8 w-8'/> </span>
+                    )
+                }
+                
             </div>
             <div className='flex flex-col overflow-y-scroll overflow-x-hidden items-center h-full px-5 '>
                 <div className="input-box h-80 min-h-80 w-4xl p-5 mt-5 flex flex-col">

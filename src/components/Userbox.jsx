@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { FaGear } from 'react-icons/fa6'
 
-const Userbox = () => {
-    const [user, setUser] = useState({username: "Username", email: "user@example.com"})
+const Userbox = ({user}) => {
   return (
     <div className="w-full p-3 flex items-center justify-center gap-5"> 
       <div className="img bg-blue-500 hover:bg-blue-200 hover:text-blue-600 hover:font-black cursor-pointer  transition-all rounded-full h-10 w-10 flex items-center justify-center text-xl text-white font-bold">{user.username.at(0)}</div>
