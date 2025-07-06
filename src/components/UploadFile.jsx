@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const UploadFile = () => {
 
@@ -56,7 +56,7 @@ const UploadFile = () => {
 
       <div className='flex flex-col items-center mb-1'>
         <input type="file" id='upload-file' accept='.pdf,.docx,.txt' className='hidden' onChange={handleFileChange} />
-        <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover theme='light' className={"text-sm"}/>
+        {/* <ToastContainer position='top-right' autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover theme='light' className={"text-sm"}/> */}
         <label htmlFor="upload-file" className='bg-blue-600 cursor-pointer hover:bg-blue-500 transition-all p-2 rounded-lg font-medium mt-3 text-lg  text-white '>Browse Files</label>
         <span className='text-sm mt-1'>Supported formats: PDF, DOCX, TXT</span>
       </div>
