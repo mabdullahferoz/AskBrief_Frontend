@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import UploadFile from './UploadFile'
-import { FaFileLines } from 'react-icons/fa6'
+import { FaFileLines, FaPaperPlane } from 'react-icons/fa6'
 import { BiSolidCopy } from 'react-icons/bi'
 import {  toast } from 'react-toastify'
+import { GrSend } from 'react-icons/gr'
 
 const Workarea = () => {
     const [type, setType] = useState("doc")
+    const msgs = ["Hello","Hi, how can I help you?","what are the restrictions mentioned for the player?","The player is not allowed to play in the tournament if they have been suspended for any reason."]
 
+    const [chat, setChat] = useState(msgs)
     const handleCopySummary = () => {
         const summaryText = document.getElementById('summary').innerText;
         navigator.clipboard.writeText(summaryText)
@@ -50,10 +53,22 @@ const Workarea = () => {
                     </div>
                 </div>
 
-                <div className="chat-box h-1/2 max-h-full w-4xl bg-teal-200">
-                    <div className="msgs flex flex-col min-h-full w-full bg-amber-100 pb-20">
-                         Messages will be displayed here 
+                <div className="chat-box max-h-full">
+                    <div id='msgs' className="flex flex-col w-4xl text-sm font-normal min-h-96 max-h-full overflow-y-auto scrollbar-custom mx-5 p-5 border border-gray-300 rounded-t-lg shadow-md bg-white">
+                         {chat.map((msg,index)=>(
+                            <div key={index} className={`msg w-full flex ${index % 2 === 0 ? 'justify-end' : ' justify-start'}  mb-3`}>
+                                <div className={`msg-content border shadow-md rounded-b-3xl max-w-2/3 p-3 ${index % 2 === 0 ? 'bg-blue-100 border-blue-200 rounded-tl-3xl ': 'bg-gray-100 border-gray-200 rounded-tr-3xl'}`}>
+                                    {msg}
+                                </div>
+
+                            </div>
+                         ))} 
                     </div>
+                    <div id="chat-input" className="w-4xl h-20 bg-white border-x border-b border-gray-300 flex gap-2 items-center justify-between mx-5 mb-10 p-5 rounded-b-lg shadow-md">
+                        <input type="text" className='w-full h-full resize-none overflow-y-auto scrollbar-custom py-2 px-4 border-1 border-gray-300 focus:outline-none focus:border-gray-400 bg-white rounded-4xl text-sm font-normal' placeholder='Ask about this document...' />
+                        <div className='send-btn flex items-center justify-center bg-blue-600 h-10 w-10 rounded-full cursor-pointer hover:bg-blue-500 transition-all '> <FaPaperPlane color='white' className='h-5 w-5 mr-0.5'/> </div>
+                    </div>
+
                 </div> 
                
             </div>
