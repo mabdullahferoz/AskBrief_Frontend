@@ -3,7 +3,7 @@ import UploadFile from './UploadFile'
 import { FaFileLines, FaPaperPlane } from 'react-icons/fa6'
 import { BiLogIn, BiSolidCopy } from 'react-icons/bi'
 import {  toast } from 'react-toastify'
-import { GrSend } from 'react-icons/gr'
+import {useNavigate} from 'react-router'
 import { FaSave } from 'react-icons/fa'
 
 const Workarea = ({setUser}) => {
@@ -22,14 +22,9 @@ const Workarea = ({setUser}) => {
         "The duration of the match is 90 minutes, divided into two halves of 45 minutes each.",
     ]
     const [chat, setChat] = useState(msgs)
-
+    const navigate = useNavigate()
     const handleLogin = ()=>{
-        setLoggedin(true);
-        toast.success("Logged in successfully!");
-        setUser({
-            username: "ferozxdev",
-            email: "ferozxdev@gmail.com"
-        });
+        return navigate("/auth/login")
     }
 
     const handleCopySummary = () => {
