@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UploadFile from './UploadFile'
 import { FaFileLines, FaPaperPlane } from 'react-icons/fa6'
 import { BiLogIn, BiSolidCopy } from 'react-icons/bi'
@@ -6,7 +6,7 @@ import {  toast } from 'react-toastify'
 import {useNavigate} from 'react-router'
 import { FaSave } from 'react-icons/fa'
 
-const Workarea = ({setUser}) => {
+const Workarea = ({user}) => {
     const [type, setType] = useState("doc")
     const [loggedin, setLoggedin] = useState(false)
     const msgs = [
@@ -26,6 +26,16 @@ const Workarea = ({setUser}) => {
     const handleLogin = ()=>{
         return navigate("/auth/login")
     }
+
+    useEffect(() => {
+        if (user.username != "username") {
+            setLoggedin(true);
+            setChat(msgs)
+        }
+    
+    
+    }, )
+    
 
     const handleCopySummary = () => {
         const summaryText = document.getElementById('summary').innerText;

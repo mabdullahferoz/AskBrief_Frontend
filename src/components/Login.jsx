@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { NavLink, useNavigate } from "react-router";
 import { toast } from 'react-toastify'
 
-const Login = ({setUser}) => {
+const Login = () => {
 
     const {
         register,
@@ -15,10 +15,7 @@ const Login = ({setUser}) => {
     const onSubmit = (data) => {
         if (data.email == "ferozxdev@gmail.com" && data.password == "password") {
             toast.success("Login Successful!")
-            setUser({
-                username: "Feroz",
-                email: "ferozxdev@gmail.com"
-            })
+            sessionStorage.setItem("user", JSON.stringify({ username: "ferozxdev", email: "ferozxdev@gmail.com"}));
             return navigate("/")
         }
     }
