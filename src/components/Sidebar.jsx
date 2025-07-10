@@ -18,7 +18,7 @@ const Sidebar = ({user}) => {
       }
     
       
-    }, )
+    }, [user.username])
     
 
     return (

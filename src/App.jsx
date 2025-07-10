@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Sidebar from './components/Sidebar'
 import Workarea from './components/Workarea'
 import { ToastContainer } from 'react-toastify'
+import { useLocation } from 'react-router'
 
 const App = () => {
 
@@ -10,12 +11,14 @@ const App = () => {
     email: "user@example.com"
   })
 
+  const location = useLocation()
+
   useEffect(() => {
-    if (sessionStorage.getItem("user")) {
-      setUser(JSON.parse(sessionStorage.getItem("user")))
-      console.log("User data loaded from session storage:", JSON.parse(sessionStorage.getItem("user")))
+    if (localStorage.getItem("user")) {
+      setUser(JSON.parse(localStorage.getItem("user")))
+      console.log("User data loaded from session storage:", JSON.parse(localStorage.getItem("user")))
     }
-  },)
+  }, [location.pathname])
   
 
   return (

@@ -34,7 +34,7 @@ const Workarea = ({user}) => {
         }
     
     
-    }, )
+    }, [user.username])
     
 
     const handleCopySummary = () => {

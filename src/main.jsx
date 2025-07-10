@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from "react-router";
 import Login from './components/login.jsx';
+import Signup from './components/Signup.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth/signup",
-    element: <div>Sginup Form</div>,
+    element: <Signup/>,
   },
 ])
 
