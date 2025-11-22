@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import UploadFile from './UploadFile'
-import { FaFileLines, FaPaperPlane } from 'react-icons/fa6'
+import { FaAngleDown, FaFileLines, FaPaperPlane } from 'react-icons/fa6'
 import { BiLogIn, BiSolidCopy } from 'react-icons/bi'
 import {  toast } from 'react-toastify'
 import {useNavigate} from 'react-router'
 import { FaSave } from 'react-icons/fa'
+import { FcCollapse } from 'react-icons/fc'
 
 const Workarea = ({user}) => {
     const [type, setType] = useState("doc")
@@ -48,6 +49,12 @@ const Workarea = ({user}) => {
             });
     } 
 
+    const [summaryCollapsed, setSummaryCollapsed] = useState(false)
+
+    const handleCollapseSummary = () => {
+        setSummaryCollapsed(prev => !prev)
+    }
+
     return (
         <div className='w-full h-full box-content text-3xl font-black flex flex-col'>
             {/* <ToastContainer className={"text-sm"} position='top-right' autoClose={2000} theme='light'/> */}
@@ -82,10 +89,18 @@ const Workarea = ({user}) => {
                         Process Document
                     </div>
                 </div>
-                <div className='summary-box max-h-full pb-15 box-border'>
-                    <div className='flex flex-col w-4xl min-h-80 max-h-full overflow-y-auto scrollbar-custom m-5 p-5 border border-gray-300 bg-white rounded-lg shadow-md'>
-                        <div className='heading font-bold text-lg flex justify-between items-center mb-5'> <span className='flex items-center'><FaFileLines className='h-6 w-6 mr-2' /> Summary</span> <span id='copy-summary' onClick={handleCopySummary} className='text-sm rounded-lg hover:bg-gray-200 cursor-pointer px-3 py-1 flex items-center gap-2'>Copy <BiSolidCopy className='h-8 w-8'/></span></div>
-                        <p id='summary' className='summary text-lg font-normal text-justify px-2'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto repellat ea, rerum amet accusamus molestiae veniam sequi expedita eos asperiores officia corporis, magnam provident eveniet id, obcaecati tempore neque totam ratione nisi quisquam recusandae laborum! Similique eum corrupti, tempore sint nobis voluptas nostrum neque veritatis accusamus vel aperiam assumenda perspiciatis animi dolorum sequi illum reiciendis laboriosam sunt minus! Dolor, architecto fugit ipsum illum nihil voluptatem adipisci in rem maiores quae possimus aliquam quam. Optio ea dignissimos, veritatis nisi dolore alias eum exercitationem soluta debitis nemo mollitia sed quaerat? Nemo sint ipsum corporis eum, officia in magnam cum quidem cumque numquam accusantium quos minima recusandae, voluptatibus repellat. Similique, iusto explicabo in dolore exercitationem illum blanditiis commodi dolorem labore voluptates repellat voluptas harum ipsam at minima dolorum accusamus nemo laudantium esse debitis porro? Ullam, excepturi! Dolorem odit facere possimus explicabo, totam delectus illo fugiat libero ipsum laboriosam, quas tenetur quod, molestiae porro modi obcaecati perferendis illum! Enim ipsum provident cupiditate fuga, perspiciatis rerum alias? Harum, ipsam nesciunt voluptas quia accusantium impedit, sunt eius enim, delectus vel beatae quibusdam nemo! Inventore minus illum id perspiciatis modi cumque distinctio dolorem quod praesentium consequuntur adipisci vero maiores provident aut enim repellendus, dicta culpa vitae. Aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod voluptate odit at distinctio quaerat magni expedita, obcaecati atque harum nostrum vero iusto assumenda sunt eius. Et dolorum quo tenetur accusamus. Labore perferendis et odit aliquam ab saepe sint vero quae quaerat, ipsam molestiae nesciunt cupiditate placeat voluptatibus odio, minus neque facere hic ut nemo! Veniam deserunt ex ratione quas porro, possimus esse asperiores obcaecati totam quis consequatur blanditiis, voluptate animi quae dolore nulla beatae eligendi quaerat eos voluptas cupiditate dolor. Laudantium quisquam neque unde, asperiores deserunt ab, delectus accusamus est inventore ducimus hic sapiente nesciunt veniam omnis nobis soluta reprehenderit dolorum eum. Totam earum odit unde maxime nesciunt esse, aspernatur aliquam ab assumenda error. Impedit aperiam quibusdam aliquam molestias fuga nisi fugit, quis at deleniti blanditiis ducimus repellendus nihil voluptatem laboriosam dolorem aspernatur assumenda sunt optio quod labore itaque ab ipsum alias eligendi! Nisi quod, nostrum dolore saepe expedita tempore sed omnis delectus temporibus ipsam voluptatem in. Suscipit iusto quos explicabo, voluptatem, odio illum neque veritatis quam, nulla vel laudantium cupiditate repudiandae. Iste rerum soluta quos sequi aliquid reprehenderit vel vitae, animi tempore, porro et eligendi omnis error quae officia eius incidunt suscipit nostrum dignissimos, autem sit inventore repellat? Asperiores.</p>
+                <div className='summary-box max-h-full transition-all duration-300 pb-15 box-border'>
+                    <div className='flex flex-col w-4xl transition-all duration-300 max-h-full m-5 p-5 border border-gray-300 bg-white rounded-lg shadow-md'>
+                        <div className='heading font-bold text-lg flex justify-between items-center'> 
+                            <span className='flex items-center'>
+                                <FaFileLines className='h-6 w-6 mr-2' /> Summary
+                                <FaAngleDown className={`h-6 w-6 mx-2 cursor-pointer transition-transform duration-300 ${summaryCollapsed ? 'rotate-180' : 'rotate-0'}`} onClick={handleCollapseSummary} />
+                            </span> 
+                            <span id='copy-summary' onClick={handleCopySummary} className='text-sm rounded-lg hover:bg-gray-200 cursor-pointer px-3 py-1 flex items-center gap-2'>
+                                Copy <BiSolidCopy className='h-8 w-8'/>
+                            </span>
+                        </div>
+                        <p id='summary' className='summary overflow-y-auto scrollbar-custom text-lg font-normal text-justify px-2' style={{ maxHeight: summaryCollapsed ? '0px' : '800px', transition: '300ms ease', marginTop: summaryCollapsed?"0px":"15px" , opacity: summaryCollapsed ? 0 : 1 }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto repellat ea, rerum amet accusamus molestiae veniam sequi expedita eos asperiores officia corporis, magnam provident eveniet id, obcaecati tempore neque totam ratione nisi quisquam recusandae laborum! Similique eum corrupti, tempore sint nobis voluptas nostrum neque veritatis accusamus vel aperiam assumenda perspiciatis animi dolorum sequi illum reiciendis laboriosam sunt minus! Dolor, architecto fugit ipsum illum nihil voluptatem adipisci in rem maiores quae possimus aliquam quam. Optio ea dignissimos, veritatis nisi dolore alias eum exercitationem soluta debitis nemo mollitia sed quaerat? Nemo sint ipsum corporis eum, officia in magnam cum quidem cumque numquam accusantium quos minima recusandae, voluptatibus repellat. Similique, iusto explicabo in dolore exercitationem illum blanditiis commodi dolorem labore voluptates repellat voluptas harum ipsam at minima dolorum accusamus nemo laudantium esse debitis porro? Ullam, excepturi! Dolorem odit facere possimus explicabo, totam delectus illo fugiat libero ipsum laboriosam, quas tenetur quod, molestiae porro modi obcaecati perferendis illum! Enim ipsum provident cupiditate fuga, perspiciatis rerum alias? Harum, ipsam nesciunt voluptas quia accusantium impedit, sunt eius enim, delectus vel beatae quibusdam nemo! Inventore minus illum id perspiciatis modi cumque distinctio dolorem quod praesentium consequuntur adipisci vero maiores provident aut enim repellendus, dicta culpa vitae. Aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod voluptate odit at distinctio quaerat magni expedita, obcaecati atque harum nostrum vero iusto assumenda sunt eius. Et dolorum quo tenetur accusamus. Labore perferendis et odit aliquam ab saepe sint vero quae quaerat, ipsam molestiae nesciunt cupiditate placeat voluptatibus odio, minus neque facere hic ut nemo! Veniam deserunt ex ratione quas porro, possimus esse asperiores obcaecati totam quis consequatur blanditiis, voluptate animi quae dolore nulla beatae eligendi quaerat eos voluptas cupiditate dolor. Laudantium quisquam neque unde, asperiores deserunt ab, delectus accusamus est inventore ducimus hic sapiente nesciunt veniam omnis nobis soluta reprehenderit dolorum eum. Totam earum odit unde maxime nesciunt esse, aspernatur aliquam ab assumenda error. Impedit aperiam quibusdam aliquam molestias fuga nisi fugit, quis at deleniti blanditiis ducimus repellendus nihil voluptatem laboriosam dolorem aspernatur assumenda sunt optio quod labore itaque ab ipsum alias eligendi! Nisi quod, nostrum dolore saepe expedita tempore sed omnis delectus temporibus ipsam voluptatem in. Suscipit iusto quos explicabo, voluptatem, odio illum neque veritatis quam, nulla vel laudantium cupiditate repudiandae. Iste rerum soluta quos sequi aliquid reprehenderit vel vitae, animi tempore, porro et eligendi omnis error quae officia eius incidunt suscipit nostrum dignissimos, autem sit inventore repellat? Asperiores.</p>
                     </div>
                 </div>
 
